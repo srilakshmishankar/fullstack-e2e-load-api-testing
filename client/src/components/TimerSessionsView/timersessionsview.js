@@ -24,7 +24,7 @@ class TimerSessionsView extends React.Component {
     return (
       <div className="row">
         <div className="col-12"></div>
-        <div className="col-12">
+        <div className="col-12" data-cy="sessions-list">
           {this.props.sessions && this.renderTimeSessions(this.props.sessions)}
         </div>
       </div>

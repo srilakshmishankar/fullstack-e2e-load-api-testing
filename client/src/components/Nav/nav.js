@@ -28,6 +28,7 @@ const Nav = (props) => {
           to={{
             pathname: buttonPaths[path],
           }}
+          data-cy="create-or-view-session"
         >
           {buttonNames[path]}
         </Link>

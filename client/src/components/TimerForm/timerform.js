@@ -63,10 +63,11 @@ class TimerForm extends React.Component {
     return (
       <div className="form-row">
         <div className="form-group col-md-12">
-          <labelz>New Session</labelz>
+          <labelz data-cy="new-session-text">New Session</labelz>
           <input
             className="form-control"
             name="name"
+            data-cy="session-name-text-box"
             placeholder="Enter Session Name"
             onChange={this.onChangeName.bind(this)}
           />
@@ -83,6 +84,7 @@ class TimerForm extends React.Component {
           className="btn btn-primary btn-block"
           onClick={this.submit.bind(this)}
           disabled={this.state.isOn || !this.state.name || !this.state.time}
+          data-cy="save-button"
         >
           Save
         </button>

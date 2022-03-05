@@ -9,15 +9,21 @@ const TimerFormField = (props) => (
         <button
           className="btn btn-outline-secondary"
           onClick={props.startTimer}
+          data-cy="start-button"
         >
           Start
         </button>
-        <button className="btn btn-outline-secondary" onClick={props.stopTimer}>
+        <button
+            className="btn btn-outline-secondary"
+            onClick={props.stopTimer}
+            data-cy="stop-button"
+        >
           Stop
         </button>
         <button
           className="btn btn-outline-secondary"
           onClick={props.resetTimer}
+          data-cy="reset-button"
         >
           Reset
         </button>
