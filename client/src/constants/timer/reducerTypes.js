@@ -1,0 +1,1 @@
+export const SET_TIMER_SESSIONS = 'SET_TIMER_SESSIONS'

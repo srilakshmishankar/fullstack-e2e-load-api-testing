@@ -1,0 +1,25 @@
+{
+  "name": "pento-time-api",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-pino-logger": "^5.0.0",
+    "standard": "^14.3.4",
+    "uuid": "^8.3.0"
+  },
+  "devDependencies": {
+    "pino-colada": "^2.1.0",
+    "nodemon": "^2.0.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --experimental-specifier-resolution=node server.js | pino-colada"
+  },
+  "author": "",
+  "license": "ISC"
+}
