@@ -9,9 +9,15 @@ jobs:
         with:
           node-version: '16'
       - run:
-          cd api-tests && npm install
+          cd api && npm install
       - run:
-          cd api-tests && npm test
+          cd client && npm install
+      - run:
+          cd api-tests && npm install
+      - run: |
+          docker-compose up &
+          cd api-tests
+          npm run wait:server && npm test
       - uses: actions/upload-artifact@v3
         with:
           name: api-test-results
@@ -25,9 +31,15 @@ jobs:
         with:
           node-version: '16'
       - run:
-          cd e2e-tests && npm install
+          cd api && npm install
       - run:
-          cd e2e-tests && npm test
+          cd client && npm install
+      - run:
+          cd e2e-tests && npm install
+      - run: |
+          docker-compose up &
+          cd e2e-tests
+          npm run wait:servers && npm test
       - uses: actions/upload-artifact@v3
         with:
           name: cypress-test-results
