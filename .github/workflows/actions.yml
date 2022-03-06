@@ -1,0 +1,34 @@
+name: Run Test Suites
+on: [push]
+jobs:
+  run-api-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - run:
+          cd api-tests && npm install
+      - run:
+          cd api-tests && npm test
+      - uses: actions/upload-artifact@v3
+        with:
+          name: api-test-results
+          path: api-tests/reports
+
+  run-e2e-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - run:
+          cd e2e-tests && npm install
+      - run:
+          cd e2e-tests && npm test
+      - uses: actions/upload-artifact@v3
+        with:
+          name: cypress-test-results
+          path: e2e-tests/cypress/reports/index.html
