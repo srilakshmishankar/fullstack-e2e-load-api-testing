@@ -10,7 +10,7 @@ export const options = {
     ],
 };
 
-const url = 'http://host.docker.internal:3001/api/sessions';
+const url = 'http://localhost:3001/api/sessions';
 const payload = JSON.stringify({
     name: 'Load testing',
     time: 10000,

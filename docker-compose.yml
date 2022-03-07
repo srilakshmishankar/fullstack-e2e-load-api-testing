@@ -16,7 +16,7 @@ services:
     volumes:
       - ./client:/src
     working_dir: /src
-    command: ['npm', 'start', 'sleep 10']
+    command: ['npm', 'start']
     ports:
       - "3000:3000"
 
