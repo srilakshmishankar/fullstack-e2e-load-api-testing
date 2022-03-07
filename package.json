@@ -7,7 +7,7 @@
     "debug": "cypress open",
     "test": "cypress run",
     "lint": "eslint .",
-    "wait:servers": "wait-on http://localhost:3000 http://localhost:3001/api/sessions"
+    "wait:servers": "wait-on http://localhost:3001/api/sessions"
   },
   "keywords": [],
   "author": "",

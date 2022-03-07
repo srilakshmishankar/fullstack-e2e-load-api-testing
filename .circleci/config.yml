@@ -1,0 +1,81 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@5.0.0
+
+jobs:
+  run-api-tests:
+    machine:
+      image: ubuntu-2004:202010-01
+    working_directory: '~/repo'
+    steps:
+      - checkout
+      - node/install:
+          node-version: '16'
+      - run:
+          name: Install API dependencies
+          command: cd api && npm ci
+      - run:
+          name: Install API test dependencies
+          command: cd api-tests && npm ci
+      - run:
+          name: Run API Server
+          command: cd api && npm start
+          background: true
+      - run:
+          name: Run API tests
+          command: cd api-tests && npm run wait:server && npm test
+
+  run-cypress-tests:
+    machine:
+      image: ubuntu-2004:202010-01
+    working_directory: '~/repo'
+    steps:
+      - checkout
+      - node/install:
+          node-version: '16'
+      - run:
+          name: Install API dependencies
+          command: cd api && npm ci
+      - run:
+          name: Install Client dependencies
+          command: cd client && npm ci
+      - run:
+          name: Run API and Web Server
+          command: docker-compose up
+          background: true
+      - run:
+          name: Install Cypress test dependencies
+          command: npm ci
+      - run:
+          name: Run Cypress tests
+          command: npm install cypress && npm run wait:servers && npm test
+
+  load-tests:
+    machine:
+      image: ubuntu-2004:202010-01
+    working_directory: '~/repo'
+    steps:
+      - checkout
+      - node/install:
+          node-version: '16'
+      - run:
+          name: Install API dependencies
+          command: cd api && npm ci
+      - run:
+          name: Install Load test dependencies
+          command: cd load-tests && npm ci
+      - run:
+          name: Run API Server
+          command: cd api && npm start
+          background: true
+      - run:
+          name: Run Load tests
+          command: cd load-tests && npm run wait:server && docker-compose up
+
+workflows:
+  setup-and-test:
+    jobs:
+      - run-api-tests
+      - run-cypress-tests
+      - load-tests
