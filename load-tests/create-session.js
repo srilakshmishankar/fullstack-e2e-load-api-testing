@@ -2,6 +2,7 @@ import http from 'k6/http';
 import { htmlReport } from 'https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js';
 
 export const options = {
+    // Ramp up from 10 virtual users up to 100, then goes back to 0
     stages: [
         { duration: '5s', target: 10 },
         { duration: '5s', target: 50 },
