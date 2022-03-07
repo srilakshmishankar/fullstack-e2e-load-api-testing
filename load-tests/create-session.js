@@ -1,4 +1,5 @@
 import http from 'k6/http';
+import { htmlReport } from 'https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js';
 
 export const options = {
     stages: [
@@ -22,6 +23,13 @@ const params = {
         'Content-Type': 'application/json',
     },
 };
+
 export default function () {
     http.post(url, payload, params);
-}
+};
+
+export function handleSummary(data) {
+    return {
+        'summary.html': htmlReport(data),
+    }
+};

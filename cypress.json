@@ -1,4 +1,12 @@
 {
   "baseUrl": "http://localhost:3000",
-  "video": false
+  "video": false,
+    "reporter": "cypress-mochawesome-reporter",
+    "reporterOptions": {
+      "reportDir": "cypress/reports",
+      "charts": true,
+      "reportPageTitle": "E2E Test Suite",
+      "embeddedScreenshots": true,
+      "inlineAssets": true
+    }
 }

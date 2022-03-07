@@ -25,6 +25,8 @@ jobs:
       - run:
           name: Run API tests
           command: cd api-tests && npm run wait:server && npm test
+      - store_artifacts:
+          path: './api-tests/reports'
 
   run-cypress-tests:
     machine:
@@ -50,6 +52,8 @@ jobs:
       - run:
           name: Run Cypress tests
           command: npm install cypress && npm run wait:servers && npm test
+      - store_artifacts:
+          path: './cypress/reports'
 
   load-tests:
     machine:
@@ -72,6 +76,8 @@ jobs:
       - run:
           name: Run Load tests
           command: cd load-tests && npm run wait:server && docker-compose up
+      - store_artifacts:
+          path: './load-tests/summary.html'
 
 workflows:
   setup-and-test:
