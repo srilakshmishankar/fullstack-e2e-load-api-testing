@@ -1,0 +1,12 @@
+{
+  "name": "load-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "get-sessions.js",
+  "scripts": {
+    "test": "docker run -i grafana/k6 run - <create-session.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
