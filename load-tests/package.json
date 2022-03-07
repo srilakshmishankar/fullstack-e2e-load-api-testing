@@ -4,9 +4,13 @@
   "description": "",
   "main": "get-sessions.js",
   "scripts": {
-    "test": "docker run -i grafana/k6 run - <create-session.js"
+    "test": "docker run -i grafana/k6 run - <create-session.js",
+    "wait:server": "wait-on http://localhost:3001/api/sessions"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "wait-on": "^6.0.1"
+  }
 }

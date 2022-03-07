@@ -44,3 +44,21 @@ jobs:
         with:
           name: cypress-test-results
           path: e2e-tests/cypress/reports/index.html
+
+  run-load-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - run:
+          cd api && npm install
+      - run:
+          cd client && npm install
+      - run:
+          cd load-tests && npm install
+      - run: |
+          docker-compose up &
+          cd load-tests
+          npm run wait:server && npm test
