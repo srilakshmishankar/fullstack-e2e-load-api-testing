@@ -1,7 +1,7 @@
 const {nanoid} = require('nanoid')
 const session = require('../pages/create-session');
 const listSessions = require('../pages/list-sessions');
-const {clickOn, validateButtonDisabled, waitFor} = require('../pages/common');
+const {clickOn} = require('../pages/common');
 
 describe('list sessions', () => {
     let sessionName;
