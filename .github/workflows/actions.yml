@@ -84,5 +84,5 @@ jobs:
           cd api && npm start &
         name: 'Start API'
       - run: |
-          cd load-tests && npm run wait:server && npm test
+          cd load-tests && npm run wait:server && docker-compose up
         name: 'Run Load tests'
