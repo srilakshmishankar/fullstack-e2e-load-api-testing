@@ -1,6 +1,6 @@
 # Notes
 
-#Test strategy for time tracking app
+## Test strategy for time tracking app
 
 Based on test pyramid, we need to consider below tests for app and api
 - Unit tests need to have high coverage (this is a simple app and can be 100%)
@@ -35,30 +35,30 @@ Also added data-cy locators to app for fast and reliable UI element locating
 ## Bugs found during test cycle:
 **FE Issues**
 
-- Create session flow
+1. Create session flow
 Steps: start and stop the timer and enter session name and click save, click on ok on pop up, app crashes --> Critical (Cypress test automated)
-However session is saved, so this is a FE issue
+However session is saved, so this is a FE error handling issue
 Logs for reference
 
-![](../Desktop/Screenshot 2022-03-08 at 02.34.17.png)
+<img width="1785" alt="Screenshot 2022-03-08 at 02 34 17" src="https://user-images.githubusercontent.com/46483554/157180598-a7940da2-fec7-41f7-a24f-9532de0b9d52.png">
+- Reset timer button click enables save
+Steps: Start timer, click on reset. The save button is enabled and we can save the session. Save button should not be enabled and on clicking reset and we should not abe able to save session because session is in progress but is allowed--> Major (Cypress test automated)
 
-- Reset timer functionality not working
-Steps: Start timer, click on reset. The save button is enabled and we can save the session. Save button should not be enabled and on clicking reset timer should clear the timer value--> Major (Cypress test automated)
-
-- Can save session without name with just spaces. Validation would be good here. Even a validation for max character limit is good to have. --> Minor (depending on criteria)
+2. Can save session without name with just spaces. Validation would be good here. Even a validation for max character limit is good to have. --> Minor (depending on criteria)
 Steps: Start and stop a session.In session name field enter space characters. Also next trying to save a very long name --> No validations here
 
-- In case during session we visit view saved session, the session so far tracked is lost --> Major
+3. In case during session we visit view saved session, the session so far tracked is lost --> Major
 Steps: Start a session and click on view saved session and the session inprogress is lost. Here an alert message or tracking in background would be better.
 
 **API Issues**
-- No input validations (falls under one category of bugs)
+
+4. No input validations (falls under one category of bugs)
     - We can create session without any req body
     - We can send a string time which results in NaN in the client
     - We can create a session with our own request parameters like name, age etc
 
-Performance issue:
-Through load testing I added a lot of sessions --> Api response is pretty quick but UI response to display them is pretty bad --> Takes more than 30 seconds to display a huge list
+5. Performance issue:
+Through load testing I added a lot of sessions --> Api response is fast enough but UI response to display them is bad --> Takes more than 30 seconds to display a huge list
 
 **Other observations** 
 
@@ -77,6 +77,7 @@ During session save, if network is down or server is down --> we can implement c
 
 - As a user I should be able to edit an existing session from the list of sessions.
 
+  - PUT endpoint implementation
   - User should be able to edit the name of the session and save 
   - Edit the session name should not allow to save empty or space characters
   - User should be able to edit the duration of the session as per below
@@ -89,6 +90,8 @@ During session save, if network is down or server is down --> we can implement c
   - Edit button should be accessible
 
 - As a user I should be able to delete an existing session from the list of sessions.
+  
+  - Delete endpoint implementation
   - Deleted session should not be listed on the sessions list.
   - Delete the session, press browser back button. Go back to sessions list, the deleted session should not show up 
   - Confirmation pop up should be displayed when delete button is clicked
@@ -100,8 +103,10 @@ During session save, if network is down or server is down --> we can implement c
 #### We want to allow users to search for sessions in the list. They should be able to search by name or duration.
 
 - As a user I should be able to search the sessions from the sessions list
+
+  - New GET endpoint with search text as parameter
+  - There should be a search text box to type
   - User should be able to search sessions by session name
-  - There should be a search text box
     - All the matching sessions containing the name should be filtered and listed
     - On deleting/adding letters, the matching sessions should be updated accordingly
     - The search results should have option to edit and delete the session
@@ -115,6 +120,14 @@ During session save, if network is down or server is down --> we can implement c
   - Search with cmd/ctrl+F should still work
   - Search bar should be accessible 
   - Empty search results UI should be displayed when no results for searched value
+
+Test strategy for new features as per defined in the beginning to align with acceptance criteria
+
+- Test according to pyramid for BE and FE
+- There will be BE api endpoints which need functionality, performance and integration testing
+- For new endpoints - 200, 500 and 404 and 201 if applicable (no 401 because no authentication here)
+- FE testing for new UI components, UI display of the BE rendered data, user experience,
+- E2E feature testing
 
 ## How to run the automated tests
 
@@ -162,6 +175,7 @@ https://19-466257621-gh.circle-artifacts.com/0/cypress/reports/index.html
 
 <img width="1780" alt="Screenshot 2022-03-08 at 02 18 04" src="https://user-images.githubusercontent.com/46483554/157178766-052876ff-3196-448b-beb7-b44f0e08a9a6.png">
 
+All the test-reports are available locally in results folder as well
 
 While trying to timebox this task I tried to give a small gist of everything possible in terms of test strategy, process, tools and automation. Of course many things can be improved and based on priority, requirement, client info we can ensure overall high quality. If I had more time then I would try to automate everything here because it is possible and optimise test run times, parallel testing, linting, optimise docker and CI/CD.
 
