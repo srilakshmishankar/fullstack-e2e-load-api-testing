@@ -1,0 +1,9 @@
+version: '3'
+services:
+  api-tests:
+    image: node:lts-slim
+    network_mode: host
+    volumes:
+      - .:/src
+    working_dir: /src
+    command: ['npm', 'test']
