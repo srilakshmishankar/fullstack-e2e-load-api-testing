@@ -1,8 +1,8 @@
 This is project for full stack web application testing.
 
-Has cypress e2e tests
-Jest and supertest for api tests
-k6 for api load testing
+- Has cypress e2e tests
+- Jest and supertest for api tests
+- k6 for api load testing
 
 More details on Notes.md
 
