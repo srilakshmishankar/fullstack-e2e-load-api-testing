@@ -1,3 +1,11 @@
+This is project for full stack web application testing.
+
+Has cypress e2e tests
+Jest and supertest for api tests
+k6 for api load testing
+
+More details on Notes.md
+
 ## Getting started
 
 Before getting started you will need Docker, Docker Compose and Node on your system.
